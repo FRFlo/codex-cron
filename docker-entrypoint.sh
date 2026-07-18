@@ -14,8 +14,8 @@ if [[ "$fields" -ne 5 ]]; then
   exit 1
 fi
 
-mkdir -p /home/codex /workspace
-chown -R codex:codex /home/codex /workspace
+mkdir -p /home/codex /app/runtime
+chown -R codex:codex /home/codex /app/runtime
 
 if [[ -f "/usr/share/zoneinfo/${TZ:-UTC}" ]]; then
   ln -snf "/usr/share/zoneinfo/${TZ:-UTC}" /etc/localtime
@@ -29,7 +29,7 @@ cat > /etc/cron.d/codex-cron <<EOF
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOME=/home/codex
-CODEX_WORKDIR=/workspace
+CODEX_WORKDIR=/app/runtime
 
 ${schedule} codex /app/codex-wakeup.sh >/proc/1/fd/1 2>/proc/1/fd/2
 EOF

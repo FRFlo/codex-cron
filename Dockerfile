@@ -18,8 +18,8 @@ COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 COPY codex-wakeup.sh /app/codex-wakeup.sh
 
 RUN chmod 0755 /usr/local/bin/docker-entrypoint.sh /app/codex-wakeup.sh \
-    && mkdir -p /workspace /home/codex \
-    && chown -R codex:codex /workspace /home/codex
+    && mkdir -p /app/runtime /home/codex \
+    && chown -R codex:codex /app/runtime /home/codex
 
 VOLUME ["/home/codex"]
 

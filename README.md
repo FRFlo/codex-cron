@@ -18,14 +18,12 @@ docker run -d \
   -e CODEX_CRON_SCHEDULE="0 0,5,10,15,20 * * *" \
   -e TZ="Europe/Paris" \
   -v codex-cron-home:/home/codex \
-  -v codex-cron-workspace:/workspace \
   codex-cron
 ```
 
 - `CODEX_CRON_SCHEDULE` : planification cron complète.
 - `TZ` : fuseau horaire utilisé par le cron dans le conteneur.
 - `codex-cron-home` : volume persistant pour la session et l'authentification.
-- `codex-cron-workspace` : répertoire dans lequel le job exécute `codex exec`.
 
 Par défaut, l'image utilise `0 0,5,10,15,20 * * *`.
 
