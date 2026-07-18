@@ -2,13 +2,13 @@
 
 Image Docker minimale qui réplique la logique du billet [Codex cron quota wakeup](https://jhuang.netlify.app/blog/2026-05-08-codex-cron-quota-wakeup/) : un cron lance périodiquement `codex exec ... "hi"` pour ouvrir des fenêtres de quota Codex.
 
-## How to build the image locally
+## Construire l'image en local
 
 ```bash
 docker build -t codex-cron .
 ```
 
-## How to run the container
+## Lancer le conteneur
 
 Le cron est piloté par `CODEX_CRON_SCHEDULE`, une expression cron standard à 5 champs. Les heures multiples sont supportées nativement via une liste séparée par des virgules.
 
@@ -29,7 +29,7 @@ docker run -d \
 
 Par défaut, l'image utilise `0 0,5,10,15,20 * * *`.
 
-## How to authenticate Codex
+## Authentifier Codex
 
 L'authentification est volontairement manuelle via `docker exec`.
 
@@ -39,23 +39,21 @@ docker exec -it -u codex -e HOME=/home/codex codex-cron codex login
 
 Les fichiers d'authentification et de session restent persistants car ils vivent sous `/home/codex`, monté sur un volume Docker.
 
-## How to inspect logs
+## Consulter les logs
 
 ```bash
 docker logs -f codex-cron
 ```
 
-## How to use the published image from GHCR
+## Utiliser l'image publiée sur GHCR
 
 Le workflow GitHub Actions publie automatiquement l'image sur GHCR à chaque `push`.
 
 ```bash
-docker pull ghcr.io/<owner>/codex-cron:latest
+docker pull ghcr.io/FRFlo/codex-cron:latest
 ```
 
-Remplace `<owner>` par le propriétaire du dépôt GitHub.
-
-## Reference behavior reproduced
+## Comportement reproduit
 
 Le script planifié exécute l'équivalent de :
 
@@ -70,11 +68,11 @@ codex exec \
 
 avec journalisation des timestamps de début et fin, comme dans le billet d'origine.
 
-## Reference: GitHub Actions publication
+## Publication GitHub Actions
 
 Le workflow `.github/workflows/docker-publish.yml` :
 
 - build l'image à chaque `push`
-- publie sur `ghcr.io/<owner>/codex-cron`
+- publie sur `ghcr.io/FRFlo/codex-cron`
 - publie des tags de branche et de commit
-- publie `latest` sur la branche par défaut
+- publie `latest` sur `develop`
