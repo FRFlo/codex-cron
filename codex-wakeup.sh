@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-workdir="${CODEX_WORKDIR:-/workspace}"
+workdir="${CODEX_WORKDIR:-/app/runtime}"
 
 {
   echo "=== START $(date --iso-8601=seconds) ==="
@@ -13,6 +13,7 @@ workdir="${CODEX_WORKDIR:-/workspace}"
     --ephemeral \
     "hi"; then
     echo "codex exec exit code: 0"
+    echo "codex exec completed successfully"
   else
     exit_code=$?
     echo "codex exec exit code: ${exit_code}"
